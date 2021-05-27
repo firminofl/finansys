@@ -47,8 +47,8 @@ export class CategoryService {
     );
   }
 
-  delete(id: number): Observable<any> {
-    return this.http.delete(`${environment.baseUrl}/${id}`).pipe(
+  delete(category: CategoryModel): Observable<any> {
+    return this.http.delete(`${environment.baseUrl}/${category.id}`).pipe(
       catchError(CategoryService.handleError),
       map(() => null)
     );
