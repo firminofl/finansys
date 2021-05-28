@@ -33,7 +33,7 @@ export class CategoryService {
     );
   }
 
-  create(category: CategoryModel): Observable<CategoryModel> {
+  create(category: CategoryModel): Observable<any> {
     return this.http.post(environment.baseUrl, category).pipe(
       catchError(CategoryService.handleError),
       map(() => category)
