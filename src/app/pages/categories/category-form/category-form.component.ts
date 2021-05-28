@@ -1,6 +1,6 @@
 import {AfterContentChecked, Component, OnInit} from '@angular/core';
 
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CategoryModel} from '../shared/category.model';
 import {CategoryService} from '../shared/category.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -88,7 +88,7 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
 
   private actionsForSuccess(category: CategoryModel): void {
     success('Solicitação processada com sucesso!', 'Sucesso');
-    console.log(category)
+
     // rediret/reaload component page
     this.router.navigateByUrl('categories', {skipLocationChange: true}).then(
       () => this.router.navigate(['categories', category.id, 'edit'])
@@ -135,6 +135,14 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
           }
         });
     }
+  }
+
+  get name(): FormControl {
+    return this.categoryForm.get('name') as FormControl;
+  }
+
+  get description(): FormControl {
+    return this.categoryForm.get('description') as FormControl;
   }
 
 }

@@ -27,9 +27,9 @@
           <label for="name">Nome</label>
           <input type="text" class="form-control" id="name" formControlName="name"/>
 
-          <div class="text-danger" *ngIf="categoryForm.get('name').invalid && categoryForm.get('name').touched">
-            <small *ngIf="categoryForm.get('name').hasError('required')">Campo Obrigatório</small>
-            <small *ngIf="categoryForm.get('name').hasError('minlength')">No mínimo 2 caracteres</small>
+          <div class="text-danger" *ngIf="name.invalid && name.touched">
+            <small *ngIf="name.hasError('required')">Campo Obrigatório</small>
+            <small *ngIf="name.hasError('minlength')">No mínimo 2 caracteres</small>
           </div>
         </div>
 
@@ -41,6 +41,12 @@
     </div>
   </div>
 
+  <div class="alert alert-danger mt-4" *ngIf="serverErrorMessages.length > 0">
+    <strong>Erro no servidor:</strong>
+    <ul>
+      <li *ngFor="let error of serverErrorMessages">{{error}}</li>
+    </ul>
+  </div>
   <button [disabled]="submittingForm || categoryForm.invalid" type="submit"
           class="btn btn-primary btn-lg float-end mt-3">Salvar
   </button>
