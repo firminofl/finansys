@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 import {Observable, throwError} from 'rxjs';
-import {map, catchError, flatMap} from 'rxjs/operators';
+import {map, catchError} from 'rxjs/operators';
 
 import {CategoryModel} from './category.model';
 import {environment} from '../../../../environments/environment';
@@ -20,35 +20,35 @@ export class CategoryService {
   }
 
   getAll(): Observable<CategoryModel[]> {
-    return this.http.get(environment.baseUrl).pipe(
+    return this.http.get(`${environment.baseUrl}/categories`).pipe(
       catchError(CategoryService.handleError),
       map(this.jsonDataToCategories)
     );
   }
 
   getById(id: number): Observable<CategoryModel> {
-    return this.http.get(`${environment.baseUrl}/${id}`).pipe(
+    return this.http.get(`${environment.baseUrl}/categories/${id}`).pipe(
       catchError(CategoryService.handleError),
       map(this.jsonDataToCategory)
     );
   }
 
   create(category: CategoryModel): Observable<CategoryModel> {
-    return this.http.post(environment.baseUrl, category).pipe(
+    return this.http.post(`${environment.baseUrl}/categories`, category).pipe(
       catchError(CategoryService.handleError),
       map(() => category)
     );
   }
 
   update(category: CategoryModel): Observable<CategoryModel> {
-    return this.http.put(`${environment.baseUrl}/${category.id}`, category).pipe(
+    return this.http.put(`${environment.baseUrl}/categories/${category.id}`, category).pipe(
       catchError(CategoryService.handleError),
       map(this.jsonDataToCategory)
     );
   }
 
   delete(category: CategoryModel): Observable<any> {
-    return this.http.delete(`${environment.baseUrl}/${category.id}`).pipe(
+    return this.http.delete(`${environment.baseUrl}/categories/${category.id}`).pipe(
       catchError(CategoryService.handleError),
       map(() => null)
     );
