@@ -20,7 +20,7 @@ export class InMemoryDatabase implements InMemoryDbService {
       } as EntryModel,
       {
         id: 2, name: 'Salário da Empresa X', description: '', type: 'revenue',
-        amount: '10.000,00', date: '05/10/2019', paid: false, categoryId: categories[1].id,
+        amount: '10000,00', date: '05/10/2019', paid: false, categoryId: categories[1].id,
         category: categories[1]
       } as EntryModel];
 
