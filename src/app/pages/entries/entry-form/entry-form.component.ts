@@ -137,7 +137,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
 
     // rediret/reaload component page
     this.router.navigateByUrl('categories', {skipLocationChange: true}).then(
-      () => this.router.navigate(['categories', entry.id, 'edit'])
+      () => this.router.navigate(['entries', entry.id, 'edit'])
     );
   }
 

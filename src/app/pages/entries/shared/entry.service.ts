@@ -1,16 +1,20 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {environment} from '../../../../environments/environment';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, flatMap, map} from 'rxjs/operators';
 import {EntryModel} from './entry.model';
+import {CategoryService} from '../../categories/shared/category.service';
+import {CategoryModel} from '../../categories/shared/category.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntryService {
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private categoryService: CategoryService) {
   }
 
   private static handleError(error: any): Observable<any> {
@@ -33,16 +37,26 @@ export class EntryService {
   }
 
   create(entry: EntryModel): Observable<EntryModel> {
-    return this.http.post(`${environment.baseUrl}/entries`, entry).pipe(
-      catchError(EntryService.handleError),
-      map(() => entry)
+    return this.categoryService.getById(Number(entry.categoryId)).pipe(
+      flatMap(category => {
+        entry.category = category;
+        return this.http.post(`${environment.baseUrl}/entries`, entry).pipe(
+          catchError(EntryService.handleError),
+          map(() => entry)
+        );
+      })
     );
   }
 
   update(entry: EntryModel): Observable<EntryModel> {
-    return this.http.put(`${environment.baseUrl}/entries/${entry.id}`, entry).pipe(
-      catchError(EntryService.handleError),
-      map(this.jsonDataToCategory)
+    return this.categoryService.getById(Number(entry.categoryId)).pipe(
+      flatMap(category => {
+        entry.category = category;
+        return this.http.put(`${environment.baseUrl}/entries/${entry.id}`, entry).pipe(
+          catchError(EntryService.handleError),
+          map(this.jsonDataToCategory)
+        );
+      })
     );
   }
 
