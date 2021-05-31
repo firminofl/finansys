@@ -8,6 +8,9 @@ import {switchMap} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 
 import {success, error} from 'toastr';
+import {LocaleSettings} from 'primeng/calendar';
+import {CategoryModel} from '../../categories/shared/category.model';
+import {CategoryService} from '../../categories/shared/category.service';
 
 @Component({
   selector: 'app-entry-form',
@@ -22,24 +25,51 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
   serverErrorMessages: string[];
   submittingForm: boolean;
   entry: EntryModel = new EntryModel();
+  categories: CategoryModel[];
+
+  imaskConfig = {
+    mask: Number,  // enable number mask
+
+    // other options are optional with defaults below
+    scale: 2,  // digits after point, 0 for integers
+    thousandsSeparator: '',  // any single char
+    padFractionalZeros: true,  // if true, then pads zeros at end to the length of scale
+    normalizeZeros: true,  // appends or removes zeros at ends
+    radix: ',',  // fractional delimiter
+  };
+
+  ptBR: LocaleSettings = {
+    firstDayOfWeek: 0,
+    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+    dayNamesMin: ['Do', 'Se', 'Te', 'Qu', 'Qu', 'Se', 'Sa'],
+    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
+      'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago',
+      'Set', 'Out', 'Nov', 'Dez'],
+    today: 'Hoje',
+    clear: 'Limpar'
+  };
 
   constructor(
     private entryService: EntryService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private categoryService: CategoryService
   ) {
     this.pageTitle = '';
     this.serverErrorMessages = [];
+    this.categories = [];
     this.submittingForm = false;
     this.entryForm = this.formBuilder.group({
       id: [null],
       name: [null, [Validators.required, Validators.minLength(2)]],
       description: [null],
-      type: [null, [Validators.required]],
+      type: ['expense', [Validators.required]],
       amount: [null, [Validators.required]],
       date: [null, [Validators.required]],
-      paid: [null, [Validators.required]],
+      paid: [true, [Validators.required]],
       categoryId: [null, [Validators.required]],
     });
   }
@@ -47,6 +77,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
   ngOnInit(): void {
     this.setCurrentAction();
     this.loadEntry();
+    this.loadCategories();
   }
 
   ngAfterContentChecked(): void {
@@ -61,6 +92,16 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
     } else {
       this.updateEntry();
     }
+  }
+
+  get typeOptions(): Array<any> {
+    return Object.entries(EntryModel.types).map(([key, value]) => {
+      console.log(`${key}: ${value}`);
+      return {
+        key,
+        value
+      };
+    });
   }
 
   private createEntry(): void {
@@ -140,6 +181,17 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
           }
         });
     }
+  }
+
+  loadCategories(): void {
+    this.categoryService.getAll().subscribe({
+      next: (response: CategoryModel[]) => {
+        this.categories = response;
+      },
+      error: (err: HttpErrorResponse) => {
+        alert(`Erro ao buscar as categorias => ${err.status} | ${err.statusText}`);
+      }
+    });
   }
 
   get name(): FormControl {
