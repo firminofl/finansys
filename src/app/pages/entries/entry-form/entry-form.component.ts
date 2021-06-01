@@ -106,7 +106,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
   private createEntry(): void {
     const entry: EntryModel = EntryModel.fromJson(this.entryForm.value);
 
-    entry.id = Math.floor((Math.random() * 10) + 5);
+    // entry.id = Math.floor((Math.random() * 10) + 5);
     this.entryService.create(entry).subscribe({
       next: (response: EntryModel) => {
         this.actionsForSuccess(response);
@@ -120,7 +120,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
   private updateEntry(): void {
     const entry: EntryModel = EntryModel.fromJson(this.entryForm.value);
 
-    entry.id = Math.floor((Math.random() * 10) + 5);
+    // entry.id = Math.floor((Math.random() * 10) + 5);
     this.entryService.update(entry).subscribe({
       next: (response: EntryModel) => {
         this.actionsForSuccess(response);

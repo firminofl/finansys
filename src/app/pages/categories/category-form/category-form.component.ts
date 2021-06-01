@@ -61,7 +61,7 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
   private createCategory(): void {
     const category: CategoryModel = Object.assign(new CategoryModel(), this.categoryForm.value);
 
-    category.id = Math.floor((Math.random() * 10) + 5);
+    // category.id = Math.floor((Math.random() * 10) + 5);
     this.categoryService.create(category).subscribe({
       next: (response: CategoryModel) => {
         this.actionsForSuccess(response);
@@ -75,7 +75,7 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
   private updateCategory(): void {
     const category: CategoryModel = Object.assign(new CategoryModel(), this.categoryForm.value);
 
-    category.id = Math.floor((Math.random() * 10) + 5);
+    // category.id = Math.floor((Math.random() * 10) + 5);
     this.categoryService.update(category).subscribe({
       next: (response: CategoryModel) => {
         this.actionsForSuccess(response);
