@@ -32,14 +32,14 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
   create(resource: T): Observable<T> {
     return this.http.post(`${this.apiPath}`, resource).pipe(
       catchError(this.handleError),
-      map(() => resource)
+      map(this.jsonDataToResource)
     );
   }
 
   update(resource: T): Observable<T> {
     return this.http.put(`${this.apiPath}/${resource.id}`, resource).pipe(
       catchError(this.handleError),
-      map(this.jsonDataToResource)
+      map(() => resource)
     );
   }
 

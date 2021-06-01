@@ -96,7 +96,6 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
 
   get typeOptions(): Array<any> {
     return Object.entries(EntryModel.types).map(([key, value]) => {
-      console.log(`${key}: ${value}`);
       return {
         key,
         value
