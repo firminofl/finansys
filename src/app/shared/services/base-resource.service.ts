@@ -2,7 +2,7 @@ import {BaseResourceModel} from '../models/base-resource.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {Injectable, Injector} from '@angular/core';
+import {Injector} from '@angular/core';
 
 export abstract class BaseResourceService<T extends BaseResourceModel> {
 
