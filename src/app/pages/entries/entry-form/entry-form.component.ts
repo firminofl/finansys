@@ -104,7 +104,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
   }
 
   private createEntry(): void {
-    const entry: EntryModel = Object.assign(new EntryModel(), this.entryForm.value);
+    const entry: EntryModel = EntryModel.fromJson(this.entryForm.value);
 
     entry.id = Math.floor((Math.random() * 10) + 5);
     this.entryService.create(entry).subscribe({
@@ -118,7 +118,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
   }
 
   private updateEntry(): void {
-    const entry: EntryModel = Object.assign(new EntryModel(), this.entryForm.value);
+    const entry: EntryModel = EntryModel.fromJson(this.entryForm.value);
 
     entry.id = Math.floor((Math.random() * 10) + 5);
     this.entryService.update(entry).subscribe({

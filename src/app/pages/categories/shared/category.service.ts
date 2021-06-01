@@ -8,6 +8,10 @@ import {environment} from '../../../../environments/environment';
 })
 export class CategoryService extends BaseResourceService<CategoryModel> {
   constructor(protected injector: Injector) {
-    super(`${environment.baseUrl}/categories`, injector);
+    super(
+      `${environment.baseUrl}/categories`,
+      injector,
+      CategoryModel.fromJson
+    );
   }
 }
