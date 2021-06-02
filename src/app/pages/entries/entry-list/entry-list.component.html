@@ -26,7 +26,7 @@
     </thead>
 
     <tbody>
-    <tr *ngFor="let entry of entries">
+    <tr *ngFor="let entry of resources">
       <td>
         <strong>{{entry.name}}</strong><br>
         <small class="text-success">{{entry.date}}</small><br>
@@ -49,7 +49,7 @@
 
       <td class="text-center">
         <a class="btn btn-outline-secondary btn-sm m-2" [routerLink]="[entry.id, 'edit']">Editar</a>
-        <a class="btn btn-outline-danger btn-sm" (click)="deleteEntry(entry)">Excluir</a>
+        <a class="btn btn-outline-danger btn-sm" (click)="deleteResource(entry)">Excluir</a>
       </td>
     </tr>
     </tbody>
