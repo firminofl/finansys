@@ -13,8 +13,12 @@ import {RouterModule} from '@angular/router';
     RouterModule
   ],
   exports: [
+    // shared modules
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
+
+    // shared components
     BreadCrumbComponent
   ]
 })
