@@ -1,4 +1,4 @@
-import {Component, Directive, OnInit} from '@angular/core';
+import {Directive, OnInit} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {BaseResourceModel} from '../../models/base-resource.model';
 import {BaseResourceService} from '../../services/base-resource.service';
