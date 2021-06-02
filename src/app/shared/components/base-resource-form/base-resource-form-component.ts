@@ -1,15 +1,18 @@
-import {AfterContentChecked, Injector, OnInit} from '@angular/core';
+import {AfterContentChecked, Component, Directive, Injectable, Injector, OnInit} from '@angular/core';
 
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 import {ActivatedRoute, Router} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 
-import {success, error} from 'toastr';
 import {BaseResourceModel} from '../../models/base-resource.model';
 import {BaseResourceService} from '../../services/base-resource.service';
 
+import {success, error} from 'toastr';
+
+@Directive()
+// tslint:disable-next-line:directive-class-suffix
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
 
   currentAction: string | undefined;
