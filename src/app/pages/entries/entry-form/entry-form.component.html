@@ -1,13 +1,11 @@
 <app-bread-crumb [items]="[{text: 'Lançamentos', link: '/entries'}, {text: this.pageTitle}]"></app-bread-crumb>
 
-<div class="row mb-4">
-  <div class="col-md-9">
-    <h1 class="h2 border-left p-lg-2">{{pageTitle}}</h1>
-  </div>
-  <div class="col-md-3">
-    <a class="btn btn-light float-end" routerLink="/entries"><< Voltar</a>
-  </div>
-</div>
+<app-page-header
+  [page-title]="pageTitle"
+  button-class="btn-light"
+  button-link="/entries"
+  button-text="<< Voltar"
+></app-page-header>
 
 <form [formGroup]="resourceForm" (submit)="submitForm()">
   <div class="card">
@@ -48,7 +46,8 @@
               <div class="input-group-prepend">
                 <div class="input-group-text">R$</div>
               </div>
-              <input [imask]="imaskConfig" type="text" class="form-control text-end" id="amount" formControlName="amount"/>
+              <input [imask]="imaskConfig" type="text" class="form-control text-end" id="amount"
+                     formControlName="amount"/>
             </div>
 
             <div class="text-danger" *ngIf="amount.invalid && amount.touched">
@@ -83,8 +82,10 @@
             <label for="paid"><b>Pago</b></label>
 
             <div class="btn-group">
-              <label (click)="paid.setValue(true)" [class.active]="paid.value === true" class="btn btn-outline-secondary">Pago</label>
-              <label (click)="paid.setValue(false)" [class.active]="paid.value === false" class="btn btn-outline-secondary">Pendente</label>
+              <label (click)="paid.setValue(true)" [class.active]="paid.value === true"
+                     class="btn btn-outline-secondary">Pago</label>
+              <label (click)="paid.setValue(false)" [class.active]="paid.value === false"
+                     class="btn btn-outline-secondary">Pendente</label>
             </div>
 
             <div class="text-danger" *ngIf="paid.invalid && paid.touched">

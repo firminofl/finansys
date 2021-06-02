@@ -38,7 +38,7 @@ export class CategoryFormComponent extends BaseResourceFormComponent<CategoryMod
 
   protected editionPageTitle(): string {
     const resourceName = this.resource.name || '';
-    return `Editando Lançamento: ${resourceName}`;
+    return `Editando Categoria: ${resourceName}`;
   }
 
   get name(): FormControl {
