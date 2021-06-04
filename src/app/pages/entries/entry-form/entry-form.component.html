@@ -23,9 +23,8 @@
               <option *ngFor="let option of typeOptions" [value]="option.key">{{option.value}}</option>
             </select>
 
-            <div class="text-danger" *ngIf="type.invalid && type.touched">
-              <small *ngIf="type.hasError('required')">Campo Obrigatório</small>
-            </div>
+            <app-form-field-error [form-control]="type"></app-form-field-error>
+
           </div>
 
           <!-- name -->
@@ -33,10 +32,7 @@
             <label for="name"><b>Lançamento</b></label>
             <input type="text" class="form-control" id="name" formControlName="name"/>
 
-            <div class="text-danger" *ngIf="name.invalid && name.touched">
-              <small *ngIf="name.hasError('required')">Campo Obrigatório</small>
-              <small *ngIf="name.hasError('minlength')">No mínimo 2 caracteres</small>
-            </div>
+            <app-form-field-error [form-control]="name"></app-form-field-error>
           </div>
 
           <!-- amount -->
@@ -50,9 +46,7 @@
                      formControlName="amount"/>
             </div>
 
-            <div class="text-danger" *ngIf="amount.invalid && amount.touched">
-              <small *ngIf="amount.hasError('required')">Campo Obrigatório</small>
-            </div>
+            <app-form-field-error [form-control]="amount"></app-form-field-error>
           </div>
 
           <!-- date -->
@@ -64,15 +58,12 @@
               inputStyleClass="form-control"
               dataType="string"
               dateFormat="dd/mm/yy"
-              [locale]="ptBR"
               [showButtonBar]="true"
               [showIcon]="true"
               placeholder="dd/mm/yyyy"
             ></p-calendar>
 
-            <div class="text-danger" *ngIf="date.invalid && date.touched">
-              <small *ngIf="date.hasError('required')">Campo Obrigatório</small>
-            </div>
+            <app-form-field-error [form-control]="date"></app-form-field-error>
           </div>
         </div>
 
@@ -88,9 +79,7 @@
                      class="btn btn-outline-secondary">Pendente</label>
             </div>
 
-            <div class="text-danger" *ngIf="paid.invalid && paid.touched">
-              <small *ngIf="paid.hasError('required')">Campo Obrigatório</small>
-            </div>
+            <app-form-field-error [form-control]="paid"></app-form-field-error>
           </div>
 
           <!-- categoryId -->
@@ -100,15 +89,15 @@
               <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
             </select>
 
-            <div class="text-danger" *ngIf="categoryId.invalid && categoryId.touched">
-              <small *ngIf="categoryId.hasError('required')">Campo Obrigatório</small>
-            </div>
+            <app-form-field-error [form-control]="categoryId"></app-form-field-error>
           </div>
 
           <!-- description -->
           <div class="form-group col-md-7">
             <label for="description"><b>Descrição</b></label>
             <input type="text" class="form-control" id="description" formControlName="description"/>
+
+            <app-form-field-error [form-control]="description"></app-form-field-error>
           </div>
         </div>
       </div>

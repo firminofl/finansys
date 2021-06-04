@@ -19,15 +19,14 @@
           <label for="name"><b>Nome</b></label>
           <input type="text" class="form-control" id="name" formControlName="name"/>
 
-          <div class="text-danger" *ngIf="name.invalid && name.touched">
-            <small *ngIf="name.hasError('required')">Campo Obrigatório</small>
-            <small *ngIf="name.hasError('minlength')">No mínimo 2 caracteres</small>
-          </div>
+          <app-form-field-error [form-control]="name"></app-form-field-error>
         </div>
 
         <div class="form-group col-md-8">
           <label for="description"><b>Descrição</b></label>
           <input type="text" class="form-control" id="description" formControlName="description"/>
+
+          <app-form-field-error [form-control]="description"></app-form-field-error>
         </div>
       </div>
     </div>
