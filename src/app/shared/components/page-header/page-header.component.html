@@ -1,10 +1,10 @@
 <div class="row mb-4">
-  <div class="col-md-9">
+  <div [class.col-md-9]="buttonShow" [class.col-md-12]="!buttonShow">
     <h1 class="h2 border-left p-lg-2">
       {{pageTitle}}
     </h1>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3" *ngIf="buttonShow">
     <a class="btn float-end" [ngClass]="buttonClass" [routerLink]="buttonLink">
       {{buttonText}}
     </a>
